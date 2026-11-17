@@ -102,7 +102,9 @@ Protected routes require a valid JWT in the Authorization header using the Beare
 
 The backend is deployed at:
 
-**API URL:** [To be added]
+**API URL:** https://api.explore-colombia.mooo.com
+
+All API endpoints are available under the `/api` prefix.
 
 The API uses HTTPS in production.
 
