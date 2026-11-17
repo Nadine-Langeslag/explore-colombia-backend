@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import User from "../models/user.js";
 import secret from "../utils/config.js";
 
 // Create user

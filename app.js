@@ -8,11 +8,11 @@ import { requestLogger, errorLogger } from "./middlewares/logger.js";
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(requestLogger);
 app.use(express.json());
-app.use(router);
+app.use("/api", router);
 app.use(errors());
 app.use(errorLogger);
 app.use(errorHandler);

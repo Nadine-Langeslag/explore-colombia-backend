@@ -24,7 +24,7 @@ const savedDestinationSchema = new mongoose.Schema({
 // Prevent duplicate saves by the same user
 savedDestinationSchema.index(
   { itemId: 1, itemType: 1, user: 1 },
-  { unique: true }
+  { unique: true },
 );
 
 export default mongoose.model("SavedDestination", savedDestinationSchema);

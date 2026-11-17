@@ -14,12 +14,12 @@ savedDestinationsRouter.post(
   "/saved-destinations",
   auth,
   validateSavedDestination,
-  saveDestination
+  saveDestination,
 );
 savedDestinationsRouter.delete(
   "/saved-destinations/:id",
   auth,
-  deleteSavedDestination
+  deleteSavedDestination,
 );
 
 export default savedDestinationsRouter;

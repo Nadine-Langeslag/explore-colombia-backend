@@ -23,4 +23,29 @@ const validateSavedDestination = celebrate({
   }),
 });
 
-export { validateSignup, validateSignin, validateSavedDestination };
+const validateExperience = celebrate({
+  body: Joi.object().keys({
+    text: Joi.string().min(10).max(300).required(),
+  }),
+});
+
+const validateDestinationId = celebrate({
+  params: Joi.object().keys({
+    destinationId: Joi.string().required(),
+  }),
+});
+
+const validateExperienceId = celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24).required(),
+  }),
+});
+
+export {
+  validateSignup,
+  validateSignin,
+  validateSavedDestination,
+  validateExperience,
+  validateDestinationId,
+  validateExperienceId,
+};
