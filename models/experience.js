@@ -2,8 +2,13 @@ import mongoose from "mongoose";
 
 const experienceSchema = new mongoose.Schema(
   {
-    destinationId: {
+    itemId: {
       type: String,
+      required: true,
+    },
+    itemType: {
+      type: String,
+      enum: ["destination", "place"],
       required: true,
     },
     author: {

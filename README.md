@@ -1,8 +1,8 @@
 # Explore Colombia — Backend
 
-The backend API for Explore Colombia, a web application designed to help users discover destinations and places across Colombia.
+The backend API for Explore Colombia, a travel discovery web application designed to help users discover destinations and places across Colombia.
 
-The API provides user authentication, saved destinations, and the ability to share experiences about destinations.
+The API provides user authentication, saved destinations and attractions, and the ability to share experiences about destinations and places.
 
 ## Technologies Used
 
@@ -36,7 +36,7 @@ The API provides user authentication, saved destinations, and the ability to sha
 
 ## Environment Variables
 
-For production, create a `.env` file with the following variables:
+For production, create a `.env` file in the project root with the following variables:
 
 ```env
 NODE_ENV=production
@@ -45,9 +45,11 @@ MONGODB_URI=your_mongodb_connection_string
 PORT=3000
 ```
 
+Replace the example values with your actual production credentials.
+
 Never commit your `.env` file or expose your credentials.
 
-In development, the application uses its local MongoDB configuration and development JWT secret.
+In development, the application uses a local MongoDB database and a development JWT secret.
 
 ## Running the Application
 
@@ -67,7 +69,7 @@ The local server runs on:
 
 `http://localhost:3000`
 
-The API routes are available under the `/api` prefix.
+All API routes are available under the `/api` prefix.
 
 ## API Routes
 
@@ -79,22 +81,28 @@ The API routes are available under the `/api` prefix.
 | POST   | `/api/signin`   | Authenticate a user                |
 | GET    | `/api/users/me` | Get the current user's information |
 
-### Saved Destinations
+### Saved Destinations and Places
 
-| Method | Endpoint                      | Description                 |
-| ------ | ----------------------------- | --------------------------- |
-| GET    | `/api/saved-destinations`     | Get saved destinations      |
-| POST   | `/api/saved-destinations`     | Save a destination or place |
-| DELETE | `/api/saved-destinations/:id` | Remove a saved destination  |
+| Method | Endpoint                      | Description                              |
+| ------ | ----------------------------- | ---------------------------------------- |
+| GET    | `/api/saved-destinations`     | Get the authenticated user's saved items |
+| POST   | `/api/saved-destinations`     | Save a destination or place              |
+| DELETE | `/api/saved-destinations/:id` | Remove a saved item                      |
 
 ### Experiences
 
-| Method | Endpoint                          | Description                       |
-| ------ | --------------------------------- | --------------------------------- |
-| GET    | `/api/experiences/:destinationId` | Get experiences for a destination |
-| POST   | `/api/experiences/:destinationId` | Share an experience               |
-| PATCH  | `/api/experiences/:id`            | Edit an experience                |
-| DELETE | `/api/experiences/:id`            | Delete an experience              |
+| Method | Endpoint                             | Description                                      |
+| ------ | ------------------------------------ | ------------------------------------------------ |
+| GET    | `/api/experiences/:itemType/:itemId` | Get experiences for a destination or place       |
+| POST   | `/api/experiences/:itemType/:itemId` | Share an experience about a destination or place |
+| PATCH  | `/api/experiences/:id`               | Edit an experience                               |
+| DELETE | `/api/experiences/:id`               | Delete an experience                             |
+
+Users must save a destination or place before sharing an experience about it. Each user can share one experience per item.
+
+Users can edit and delete only their own experiences. Saved items are associated with the authenticated user.
+
+### Authentication and Authorization
 
 Protected routes require a valid JWT in the Authorization header using the Bearer scheme.
 
@@ -102,11 +110,11 @@ Protected routes require a valid JWT in the Authorization header using the Beare
 
 The backend is deployed at:
 
-**API URL:** https://api.explore-colombia.mooo.com
+**API URL:** [https://api.explore-colombia.mooo.com](https://api.explore-colombia.mooo.com)
 
 All API endpoints are available under the `/api` prefix.
 
-The API uses HTTPS in production.
+The production API uses HTTPS.
 
 ## Author
 

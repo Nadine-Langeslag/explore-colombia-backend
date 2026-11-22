@@ -1,12 +1,14 @@
 import Experience from "../models/experience.js";
 import SavedDestination from "../models/savedDestination.js";
 
-// Get experiences for a destination.
+// Get experiences for a destination or place.
 const getExperience = async (req, res, next) => {
   try {
-    const experiences = await Experience.find({
-      destinationId: req.params.destinationId,
-    }).sort({ createdAt: -1 });
+    const { itemId, itemType } = req.params;
+
+    const experiences = await Experience.find({ itemId, itemType })
+      .populate("author", "name")
+      .sort({ createdAt: -1 });
 
     res.json({ data: experiences });
   } catch (error) {
@@ -18,24 +20,41 @@ const getExperience = async (req, res, next) => {
 const createExperience = async (req, res, next) => {
   try {
     const { text } = req.body;
-    const { destinationId } = req.params;
+    const { itemId, itemType } = req.params;
+
     const savedDestination = await SavedDestination.findOne({
-      itemId: destinationId,
-      itemType: "destination",
+      itemId,
+      itemType,
       user: req.user._id,
     });
 
     if (!savedDestination) {
       return res.status(403).json({
-        message: "You must save this destination before sharing an experience",
+        message: "You must save this item before sharing an experience",
+      });
+    }
+
+    const existingExperience = await Experience.findOne({
+      itemId,
+      itemType,
+      author: req.user._id,
+    });
+
+    if (existingExperience) {
+      return res.status(409).json({
+        message: "You have already shared an experience for this item.",
       });
     }
 
     const experience = await Experience.create({
-      destinationId,
+      itemId,
+      itemType,
       text,
       author: req.user._id,
     });
+
+    await experience.populate("author", "name");
+
     res.status(201).json({ data: experience });
   } catch (error) {
     if (error.name === "ValidationError") {
@@ -44,6 +63,7 @@ const createExperience = async (req, res, next) => {
           "It was not possible to create the experience. Review the data sent.",
       });
     }
+
     return next(error);
   }
 };

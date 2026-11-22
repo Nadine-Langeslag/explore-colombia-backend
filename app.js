@@ -1,5 +1,6 @@
 import express from "express";
 import { errors } from "celebrate";
+import cors from "cors";
 
 import connectToDatabase from "./utils/mongo.js";
 import router from "./routes/index.js";
@@ -7,6 +8,8 @@ import errorHandler from "./middlewares/errors.js";
 import { requestLogger, errorLogger } from "./middlewares/logger.js";
 
 const app = express();
+
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 

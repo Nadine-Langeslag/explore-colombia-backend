@@ -29,12 +29,12 @@ const validateExperience = celebrate({
   }),
 });
 
-const validateDestinationId = celebrate({
+const validateExperienceItem = celebrate({
   params: Joi.object().keys({
-    destinationId: Joi.string().required(),
+    itemType: Joi.string().valid("destination", "place").required(),
+    itemId: Joi.string().required(),
   }),
 });
-
 const validateExperienceId = celebrate({
   params: Joi.object().keys({
     id: Joi.string().hex().length(24).required(),
@@ -46,6 +46,6 @@ export {
   validateSignin,
   validateSavedDestination,
   validateExperience,
-  validateDestinationId,
+  validateExperienceItem,
   validateExperienceId,
 };

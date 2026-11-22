@@ -8,22 +8,22 @@ import {
 import auth from "../middlewares/auth.js";
 import {
   validateExperience,
-  validateDestinationId,
+  validateExperienceItem,
   validateExperienceId,
 } from "../middlewares/validation.js";
 
 const experienceRouter = Router();
 
 experienceRouter.get(
-  "/experiences/:destinationId",
+  "/experiences/:itemType/:itemId",
   auth,
-  validateDestinationId,
+  validateExperienceItem,
   getExperience,
 );
 experienceRouter.post(
-  "/experiences/:destinationId",
+  "/experiences/:itemType/:itemId",
   auth,
-  validateDestinationId,
+  validateExperienceItem,
   validateExperience,
   createExperience,
 );
