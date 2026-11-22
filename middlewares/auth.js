@@ -1,0 +1,27 @@
+import jwt from "jsonwebtoken";
+import secret from "../utils/config.js";
+
+// Middleware to authenticate user using JWT
+const auth = (req, res, next) => {
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith("Bearer ")) {
+    return res.status(401).json({
+      message: "Autorization is required",
+    });
+  }
+  const token = authorization.replace("Bearer ", "");
+  let payload;
+
+  try {
+    payload = jwt.verify(token, secret);
+  } catch (err) {
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
+  }
+  req.user = payload;
+  next();
+};
+
+export default auth;

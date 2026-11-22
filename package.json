@@ -1,0 +1,42 @@
+{
+  "name": "explore-colombia-backend",
+  "version": "1.0.0",
+  "description": "Explore Colombia — Backend",
+  "author": "Nadine Langeslag",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node --env-file=.env app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nadine-Langeslag/explore-colombia-backend.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nadine-Langeslag/explore-colombia-backend/issues"
+  },
+  "homepage": "https://github.com/Nadine-Langeslag/explore-colombia-backend#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "celebrate": "^16.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-winston": "^4.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.12.1",
+    "validator": "^13.15.35",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "nodemon": "^3.1.14"
+  }
+}
